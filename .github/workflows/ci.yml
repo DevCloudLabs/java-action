@@ -11,6 +11,7 @@ on:
 
 jobs:
   build-java:
+    environment: testing
 
     runs-on: ubuntu-latest
     
@@ -27,4 +28,13 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Build and push to DockerHub
+      uses: docker/build-push-action@v4
+      with: 
+        image: nirmalnaveen/java-action
+        username: ${{secrets.DOCKER_USERNAME}}
+        password: ${{secrets.DOCKER_PASSWORD}}
+
+
          
